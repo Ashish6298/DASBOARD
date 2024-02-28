@@ -1,7 +1,7 @@
 import React from "react";
 import "./MainContainer.css";
 // import Banner from "../img/back.jpg";
-import CardMain from "./CardMain";
+import CardMain from "./MedicalPrescriptionCard";
 import Card1 from "../img/pres.jpg";
 import Card2 from "../img/tel.jpg";
 import Card3 from "../img/cars.jpg";

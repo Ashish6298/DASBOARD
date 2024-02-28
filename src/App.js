@@ -1,7 +1,8 @@
 // import logo from "./logo.svg";
 import {Route, Link, BrowserRouter,Routes } from 'react-router-dom';
 import Pre from "./Components/pages/Pre";
-import Med from "./Components/pages/Med"
+import Med from "./Components/pages/predes"
+import Videodes from "./Components/pages/videodes" ;
 import "./App.css";
 import Menu from "./Components/Menu";
 import Container from "./Components/Container";
@@ -15,7 +16,10 @@ function App() {
       <Routes>
       <Route path="/" element={<Container />}/>
       <Route path="/pre" element={<Pre />}/>
-      <Route path="/med" element={<Med />}/>
+      <Route path="/predes" element={<Med />}/>
+      <Route path="/videodes" element={<Videodes/>} />
+      
+
       </Routes>
       </BrowserRouter>
     </div>

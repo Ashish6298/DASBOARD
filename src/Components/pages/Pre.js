@@ -50,9 +50,6 @@
 // export default Pre;
 
 
-
-
-
 import React, { useState } from 'react';
 import Webcam from 'react-webcam';
 import Tesseract from 'tesseract.js';
@@ -60,6 +57,7 @@ import Tesseract from 'tesseract.js';
 const Pre = () => {
   const [recognizedText, setRecognizedText] = useState('');
   const [typedText, setTypedText] = useState('');
+  const [uploadedImage, setUploadedImage] = useState(null);
 
   const webcamRef = React.useRef(null);
 
@@ -70,6 +68,15 @@ const Pre = () => {
 
   const handleInputChange = (event) => {
     setTypedText(event.target.value);
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      setUploadedImage(reader.result);
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleSubmit = () => {
@@ -87,8 +94,8 @@ const Pre = () => {
   };
 
   return (
-    <div style={{ margin:"400px", marginTop :"50px"}}>
-      <h1 style={{color:"white"}}>OCR with Camera Access</h1>
+    <div style={{ margin: "400px", marginTop: "50px" }}>
+      <h1 style={{ color: "white" }}>OCR with Camera Access</h1>
 
       <div>
         <Webcam
@@ -100,17 +107,25 @@ const Pre = () => {
         />
       </div>
 
-      <button style={{backgroundColor:"white", margin:"10px"}} onClick={capture}>Capture</button>
       <div>
-        <h2 style={{color:"white"}}>Recognized Text:</h2>
-        <p style={{color:"white"}}>{recognizedText}</p>
+        <button style={{ backgroundColor: "white", margin: "10px" }} onClick={capture}>Capture</button>
+        <input type="file" accept="image/*" onChange={handleFileChange} style={{ margin: "10px" }} />
+      </div>
+<br></br>
+      <div>
+        <h2 style={{ color: "white" }}>Recognized Text:</h2>
+        <p style={{ color: "white" }}>{recognizedText}</p>
+      </div>
+<br></br>
+      <div>
+        <h2 style={{ color: "white" }}>Type Medical Prescription:</h2>
+        <textarea rows="2" cols="50" value={typedText} onChange={handleInputChange} />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <button style={{ backgroundColor: "green", margin: "10px" }} onClick={handleSubmit}>Submit</button>
+        </div>
       </div>
 
-      <div>
-        <h2 style={{color:"white"}}>Type Medical Prescription:</h2>
-        <textarea rows="2" cols="50" value={typedText} onChange={handleInputChange} />
-        <button style={{backgroundColor:"green", margin:"10px"}} onClick={handleSubmit}>Submit</button>
-      </div>
+      
     </div>
   );
 };
